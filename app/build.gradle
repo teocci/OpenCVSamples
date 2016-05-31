@@ -1,0 +1,148 @@
+apply plugin: 'com.android.application'
+
+/**
+ * The android {} block is where you configure all your Android-specific
+ * build options.
+ */
+
+android {
+    /**
+     * compileSdkVersion specifies the Android API level Gradle should use to
+     * compile your app. This means your app can use the API features included in
+     * this API level and lower.
+     *
+     * buildToolsVersion specifies the version of the SDK build tools, command-line
+     * utilities, and compiler that Gradle should use to build your app. You need to
+     * download the build tools using the SDK Manager.
+     */
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    /**
+     * The defaultConfig {} block encapsulates default settings and entries for all
+     * build variants, and can override some attributes in main/AndroidManifest.xml
+     * dynamically from the build system. You can configure product flavors to override
+     * these values for different versions of your app.
+     */
+    defaultConfig {
+
+        /**
+         * applicationId uniquely identifies the package for publishing.
+         * However, your source code should still reference the package name
+         * defined by the package attribute in the main/AndroidManifest.xml file.
+         */
+        applicationId = "com.kseek.opencvsamples"
+
+        // Defines the minimum API level required to run the app.
+        minSdkVersion 19
+
+        // Specifies the API level used to test the app.
+        targetSdkVersion 23
+
+        // Defines the version number of your app.
+        versionCode = 1
+
+        // Defines a user-friendly version name for your app.
+        versionName = "1.0"
+
+        ndk {
+            moduleName = "ndklibrarysample"
+            cFlags "-std=c++11 -fexceptions -frtti"
+
+            cFlags cFlags + " -I${file("/home/teocci/LibSRC/OpenCV-android-sdk/sdk/native/jni/include")}".toString()
+            ldLibs "android", "EGL", "GLESv2", "dl", "log", "z"
+            stl "gnustl_static"
+        }
+    }
+
+    sourceSets.main {
+        //jni.srcDirs = [] // This prevents the auto generation of Android.mk
+        //jniLibs.srcDir 'src/main/libs' // This is not necessary unless you have precompiled libraries in your project.
+    }
+
+    /**
+     * The buildTypes {} block is where you can configure multiple build types.
+     * By default, the build system defines two build types: debug and release. The
+     * debug build type is not explicitly shown in the default build configuration,
+     * but it includes debugging tools and is signed with the debug key. The release
+     * build type applies Proguard settings and is not signed by default.
+     */
+    buildTypes {
+
+        /**
+         * By default, Android Studio configures the release build type to enable code
+         * shrinking, using minifyEnabled, and specifies the Proguard settings file.
+         */
+        release {
+            minifyEnabled true // Enables code shrinking for the release build type.
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+
+    /**
+     * The productFlavors {} block is where you can configure multiple product
+     * flavors. This allows you to create different versions of your app that can
+     * override defaultConfig {} with their own settings. Product flavors are
+     * optional, and the build system does not create them by default. This example
+     * creates a free and paid product flavor. Each product flavor then specifies
+     * its own application ID, so that they can exist on the Google Play Store, or
+     * an Android device, simultaneously.
+     */
+
+    productFlavors {
+        arm {
+            ndk {
+                abiFilters "armeabi"
+
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                def libsDir = curDir.absolutePath + "/src/main/jniLibs/armeabi/libopencv_java3.so"
+
+                ldLibs libsDir
+            }
+        }
+
+        armv7 {
+            ndk {
+                abiFilter "armeabi-v7a"
+
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                def libsDir = curDir.absolutePath + "/src/main/jniLibs/x86/"
+
+                ldLibs libsDir + "libopencv_java3.so"
+            }
+        }
+
+        x86 {
+            ndk {
+                abiFilters "x86"
+
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath + "/src/main/jniLibs/x86/"
+
+                ldLibs libsDir + "libopencv_java3.so"
+            }
+        }
+        mips {
+            ndk  {
+                abiFilters "mips"
+
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                def libsDir = curDir.absolutePath + "/src/main/jniLibs/mips/"
+
+                ldLibs libsDir + "libopencv_java3.so"
+            }
+        }
+        fat {
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.+'
+    compile project(':opencv')
+}

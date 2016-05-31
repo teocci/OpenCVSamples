@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kseek.opencvsamples" >
+
+    <!-- Camera Permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.kseek.opencvsamples.activities.SamplesActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.Tutorial1Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial1"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.Tutorial2Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial2"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.Tutorial3Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial3"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.ImageManipulationsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_image_manipulations"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.ColorBlobDetectionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_color_blob_detection"
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.CameraCalibrationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_camera_calibration"
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.Puzzle15Activity"
+            android:label="@string/title_activity_puzzle15"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:name="com.kseek.opencvsamples.activities.FaceDetectionActivity"
+            android:label="@string/title_activity_face_detection"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            android:parentActivityName="com.kseek.opencvsamples.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kseek.opencvsamples.activities.SamplesActivity" />
+        </activity>
+    </application>
+</manifest>
